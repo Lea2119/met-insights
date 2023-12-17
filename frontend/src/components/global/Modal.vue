@@ -1,10 +1,10 @@
 <template>
 	<div class="modal d-flex align-center justify-center">
 		<div class="modal-content d-flex">
-			<div class="w-50 h-100 d-flex flex-column align-center justify-center text-body-1">
+			<div class="w-50 h-100 d-flex flex-column align-center justify-center text-subtitle-1">
 				<p class="ma-4">{{ message }}</p>
 				<p class="ma-4">
-					<router-link to="/" class="font-weight-bold create-account">
+					<router-link :to="redirectedPath" class="font-weight-bold create-account">
 						{{ link }}
 					</router-link>
 					{{ additionalText }}
@@ -26,14 +26,14 @@
 							<p class="mb-5 text-h6 font-weight-bold">{{ title }}</p>
 						</div>
 						<v-text-field
-							class="my-2"
+							class="my-4"
 							v-model="email.value.value"
 							variant="outlined"
 							label="Email Address"
 							:error-messages="email.errorMessage.value"
 						></v-text-field>
 						<v-text-field
-							class="my-2"
+							class="my-4"
 							v-model="password.value.value"
 							:type="showPassword ? 'text' : 'password'"
 							:append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
@@ -44,11 +44,11 @@
 						></v-text-field>
 						<v-text-field
 							v-if="$route.path === '/create-account'"
-							class="my-2"
+							class="my-4"
 							v-model="password.value.value"
-							:type="showPassword ? 'text' : 'password'"
-							:append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
-							@click:append-inner="showPassword = !showPassword"
+							:type="showConfirmPassword ? 'text' : 'password'"
+							:append-inner-icon="showConfirmPassword ? 'mdi-eye-off' : 'mdi-eye'"
+							@click:append-inner="showConfirmPassword = !showConfirmPassword"
 							variant="outlined"
 							label="Confirm Password"
 							:error-messages="password.errorMessage.value"
@@ -60,7 +60,7 @@
 							color="black"
 							class="w-100 mt-2"
 							@click="submit"
-							>Sign In</v-btn
+							>{{ buttonLabel }}</v-btn
 						>
 					</v-form>
 				</div>
@@ -71,18 +71,20 @@
 
 <script setup lang="ts">
 import { useField, useForm } from "vee-validate"
-import { ref, defineProps } from "vue"
+import { ref, defineProps, computed } from "vue"
 import { useRouter } from "vue-router"
 
-const { title, message, link, additionalText } = defineProps([
+const { title, message, link, additionalText, buttonLabel } = defineProps([
 	"title",
 	"message",
 	"link",
 	"additionalText",
+	"buttonLabel",
 ])
 
 const router = useRouter()
 const showPassword = ref(false)
+const showConfirmPassword = ref(false)
 
 const { handleSubmit } = useForm({
 	validationSchema: {
@@ -97,7 +99,7 @@ const { handleSubmit } = useForm({
 			if (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(value)) {
 				return true
 			} else {
-				return "At least eight characters with one letter and one number"
+				return "Minimum of eight characters containing at least one letter and one number"
 			}
 		},
 	},
@@ -113,6 +115,10 @@ const submit = handleSubmit((values) => {
 const redirectToHome = () => {
 	router.push({ path: "/" })
 }
+
+const redirectedPath = computed(() => {
+	return router.currentRoute.value.path === "/login" ? "/create-account" : "/login"
+})
 </script>
 
 <style scoped>
@@ -128,8 +134,8 @@ const redirectToHome = () => {
 
 .modal-content {
 	background-color: white;
-	height: 500px;
-	width: 1000px;
+	height: 600px;
+	width: 1100px;
 }
 
 .create-account {
