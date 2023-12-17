@@ -1,13 +1,13 @@
 <template>
-	<div class="login-container d-flex pa-16 align-center h-screen">
+	<div class="signup-container d-flex pa-16 align-center h-screen">
 		<TextPattern />
 		<Modal
-			title="WELCOME BACK"
-			message="Don't have an account?"
-			link="Create an account"
-			additionalText="and access full content"
-			buttonLabel="SIGN IN"
-			redirectedPath="/create-account"
+			title="CREATE ACCOUNT"
+			message="Already have an account?"
+			link="Login"
+			additionalText="and access your content"
+			buttonLabel="SUBMIT"
+			redirectedPath="/login"
 		/>
 	</div>
 </template>
@@ -18,7 +18,7 @@ import Modal from "@/components/global/Modal.vue"
 </script>
 
 <style scoped>
-.login-container {
+.signup-container {
 	background-color: rgba(228, 1, 44, 0.8);
 }
 </style>
