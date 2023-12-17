@@ -45,14 +45,14 @@
 			</div>
 		</div>
 		<div class="my-16 pa-16 text-white text-h4 d-flex align-center justify-center">
-			<v-btn
-				class="mx-4 text-red font-weigh-bold"
-				variant="flat"
-				size="x-large"
-				@click="redirectToSignup"
+			<v-btn class="mx-4 text-red font-weigh-bold" variant="flat" size="x-large"
 				>CREATE AN ACCOUNT</v-btn
 			>
-			<v-btn class="mx-4 font-weigh-bold" variant="outlined" size="x-large"
+			<v-btn
+				class="mx-4 font-weigh-bold"
+				variant="outlined"
+				size="x-large"
+				@click="redirectToHome"
 				>CONTINUE AS GUEST</v-btn
 			>
 		</div>
@@ -69,8 +69,8 @@ const redirectToLogin = () => {
 	router.push({ path: "/login" })
 }
 
-const redirectToSignup = () => {
-	router.push({ path: "/create-account" })
+const redirectToHome = () => {
+	router.push({ path: "/home" })
 }
 </script>
 

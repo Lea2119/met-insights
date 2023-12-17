@@ -8,7 +8,7 @@ const routes = [
     children: [
       {
         path: "",
-        name: "Home",
+        name: "Landing",
         component: () => import("@/views/Landing.vue"),
       },
       {
@@ -20,6 +20,11 @@ const routes = [
         path: '/create-account', 
         name: 'Create Account', 
         component: () => import('@/views/Signup.vue'), 
+      },
+      {
+        path: '/home', 
+        name: 'Home', 
+        component: () => import('@/views/Home.vue'), 
       },
     ],
   },

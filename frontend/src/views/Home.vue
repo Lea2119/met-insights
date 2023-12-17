@@ -1,7 +1,11 @@
 <template>
-  <HelloWorld />
+	<div>
+		<h1>HOME</h1>
+		<Artworks />
+	</div>
 </template>
 
-<script lang="ts" setup>
-import HelloWorld from "@/components/HelloWorld.vue";
+<script setup lang="ts">
+import Artworks from "@/components/Home/Artworks.vue"
 </script>
+<style scoped></style>
